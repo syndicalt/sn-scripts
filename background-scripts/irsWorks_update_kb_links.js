@@ -35,7 +35,7 @@ var tables = [
     } 
 ]
 
-var instanceUrl = gs.getProperty('glide.servlet.uri') + 'esc?id=kb_article_view&sysparm_article='
+var instanceUrl = gs.getProperty('glide.servlet.uri') + '/kb_view.do?sysparm_article='
 var regexHref = /(href)/
 var regexTarget = /target="_blank"/
 
