@@ -60,7 +60,7 @@ tables.forEach(function(table) {
                             gs.print(gr[field])
                             gr.update()
                         } else {
-                            gs.print('[KB URL Builder v2.1.0] - ' + gr.number + ' - No record found for link to ' + kbNo[0] + ' (URL: ' + instanceUrl + kbNo[0] + ')')
+                            gs.print('[KB URL Builder v2.5.0] - ' + gr.number + ' - No record found for link to ' + kbNo[0] + ' (URL: ' + instanceUrl + kbNo[0] + ')')
                         }
                     }
                 }
