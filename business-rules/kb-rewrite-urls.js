@@ -19,7 +19,7 @@
 	for (var key in gr) {
 		fields.push(key)
 	}
-	
+
 	fields.forEach(function(field) {
 		/** @param searchKb - get an array of all KB and KBPR numbers in the field */
 		var searchKb = gr[field].match(/KB\d{7}|KBPR\d{4}/g)
@@ -40,7 +40,7 @@
 		* ui page redirect url
 		*/
 		uniqueKb.forEach(function(item) {
-			var newUrl = url + 'redirect_ui_page.do?sysparm_article=' + item
+			var newUrl = url + 'irs_kbRedirect.do?kb_article=' + item
 			var urlReplace = '<a title="' + item + '" href="' + newUrl + '" rel="nofollow">' + item + '</a>'
 			var regexString = '<a title=\"' + item + '\" href=(.*?) rel=(.*?)>(.*?)<\/a>'
 			gr[field] = gr[field].replace(new RegExp(regexString,'g'), urlReplace)
