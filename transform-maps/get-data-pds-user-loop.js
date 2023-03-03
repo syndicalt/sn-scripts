@@ -23,7 +23,7 @@ function updateUsers() {
             httpStatus = response.getStatusCode(),
             res = JSON.parse(responseBody);
 
-        if(httpStatus != 200) { 
+        if(httpStatus !== 200) { 
             gs.error('[PDS-updateUsers] API Error: ' + httpStatus + ', Message: ' + res, 'PDS');
             continue;
         }
@@ -33,24 +33,11 @@ function updateUsers() {
             continue;
         }
         
-        /** update user record */
+        /** update sys_user record */
         gr.title = res[0].jobTitle;
         gr.update();
-        
         /** update hr profile */
-        if(new sn_hr_core.pbsApiUtil().isHrProfile(gr.sys_id)){
-            try{
-                hrOperations(gr.sys_id, res, 'update');
-            }catch(e) {
-                gs.error('[PDS] Error: ' + e, 'PDS');
-            }
-        } else {
-            try{
-                hrOperations(gr.sys_id, res, 'create');
-            }catch(e) {
-                gs.error('[PDS] Error: ' + e, 'PDS');
-            }
-        }
+        hrOperations(gr.sys_id, res)
 
         gs.info('[PDS-updateUser] User data updated for ' + gr.user_name, 'PDS');
     }
@@ -64,7 +51,7 @@ function updateUsers() {
 * @description - this function will create or update the HR profile. 
 * @returns null
 */
-function hrOperations(id, obj, oper) {
+function hrOperations(id, obj) {
     var hr = {},
     hrProfile;
     //dpt = obj.department.code;
@@ -82,22 +69,30 @@ function hrOperations(id, obj, oper) {
     hr.u_pay_series = obj.paySeries;
     hr.u_pay_step = obj.payStep;
     hr.u_pay_plan = obj.payPlan;
-    hr.u_department_code = obj.department.code;
+    hr.department = obj.department.code;
     hr.u_employee_status = obj.employeeStatus;
     hr.employment_end_date = getSnDate(obj.separationDate);
     hr.employment_start_date = getSnDate(obj.enterOnDuty);
 
-    if(oper === 'create') {
+    if(new sn_hr_core.pbsApiUtil().isHrProfile(id)){
+        try{
+            hrProfile = new sn_hr_core.pbsApiUtil();
+            hrProfile.updateHrProfile(id, JSON.stringify(hr));
+            gs.info('[PDS-hrOperations] hr profile updated for ' + id, 'PDS');
+            return true; 
+        }catch(e) {
+            gs.error('[PDS] Error: ' + e, 'PDS');
+        }
+    }
+        
+    try{
         hrProfile = new sn_hr_core.hr_UserToProfileMigration();
         hrProfile.createProfilesFromQuery('sys_id=' + id, JSON.stringify(hr));
         gs.info('[PDS-hrOperations] hr profile created for ' + id, 'PDS');
         return true;
+    }catch(e) {
+        gs.error('[PDS] Error: ' + e, 'PDS');
     }
-        
-    hrProfile = new sn_hr_core.pbsApiUtil();
-    hrProfile.updateHrProfile(id, JSON.stringify(hr));
-    gs.info('[PDS-hrOperations] hr profile updated for ' + id, 'PDS');
-    return true;
 }
 
 /**
