@@ -67,7 +67,7 @@ function hrOperations(id, obj) {
     hr.u_retirement_title = obj.retirement.title;
     hr.u_tour_name = obj.tourName;
     hr.u_pay_series = obj.paySeries;
-    hr.u_pay_step = obj.payStep;
+    hr.u_pay_step = obj.payStep;git a
     hr.u_pay_plan = obj.payPlan;
     hr.department = obj.department.code;
     hr.u_employee_status = obj.employeeStatus;
