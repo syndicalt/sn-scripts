@@ -1,3 +1,8 @@
+/**
+ * Class: irs_kbCategoryOperations
+ * Method: get - Returns data from sys_property irs.knowledge.categoryMap
+ * Method: query - Returns the sys_id of the KB Category
+ */
 var irs_kbCategoryOperations = Class.create();
 irs_kbCategoryOperations.prototype = Object.extendsObject(AbstractAjaxProcessor, {
 	
