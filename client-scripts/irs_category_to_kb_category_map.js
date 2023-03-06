@@ -25,27 +25,28 @@ function onLoad() {
 				ga1.addParam('sysparm_name','query'),
 				ga1.addParam('sysparm_kb', kb)
 
-				if(catMap['Database'].indexOf(kbCategory) > -1) ga1.addParam('sysparm_category','Database')
-				if(catMap['Email'].indexOf(kbCategory) > -1) ga1.addParam('sysparm_category','Email')
-				if(catMap['Hardware'].indexOf(kbCategory) > -1) ga1.addParam('sysparm_category','Hardware')
-				if(catMap['Network'].indexOf(kbCategory) > -1) ga1.addParam('sysparm_category','Network')
-				if(catMap['Security'].indexOf(kbCategory) > -1) ga1.addParam('sysparm_category','Security')
-				if(catMap['Software'].indexOf(kbCategory) > -1) ga1.addParam('sysparm_category','Software')
+			if(catMap['Database'].indexOf(kbCategory) > -1) ga1.addParam('sysparm_category','Database')
+			if(catMap['Email'].indexOf(kbCategory) > -1) ga1.addParam('sysparm_category','Email')
+			if(catMap['Hardware'].indexOf(kbCategory) > -1) ga1.addParam('sysparm_category','Hardware')
+			if(catMap['Network'].indexOf(kbCategory) > -1) ga1.addParam('sysparm_category','Network')
+			if(catMap['Security'].indexOf(kbCategory) > -1) ga1.addParam('sysparm_category','Security')
+			if(catMap['Software'].indexOf(kbCategory) > -1) ga1.addParam('sysparm_category','Software')
+			
+			ga1.getXMLAnswer(function(answer){
+				var response = JSON.parse(answer)
 				
-				ga1.getXMLAnswer(function(answer){
-					var response = JSON.parse(answer)
-					
-					if(response.status != 200) {
-						g_form.addErrorMessage(response.result)
-						return false
-					}
-					
-					try{
-						g_form.setValue('kb_category', response.result)
-					}catch(e){
-						g_form.addErrorMessage(e)
-					}
-				})
+				if(response.status != 200) {
+					g_form.addErrorMessage(response.result)
+					return false
+				}
+				
+				try{
+					g_form.setValue('kb_category', response.result)
+					return true
+				}catch(e){
+					g_form.addErrorMessage(e)
+				}
+			})
 		}
 	})
 }

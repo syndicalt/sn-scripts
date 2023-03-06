@@ -1,4 +1,4 @@
-var a = {
+const arr = {
     "Database": [
         "Database"
     ],
@@ -27,3 +27,15 @@ var a = {
         "Business System Application Issue"
     ]
 }
+
+const kbCategory = 'Database'
+let res
+
+if(arr['Database'].indexOf(kbCategory) > -1) res = 'Database'
+if(arr['Email'].indexOf(kbCategory) > -1) res = 'Email'
+if(arr['Hardware'].indexOf(kbCategory) > -1) res = 'Hardware'
+if(arr['Network'].indexOf(kbCategory) > -1) res = 'Network'
+if(arr['Security'].indexOf(kbCategory) > -1) res = 'Security'
+if(arr['Software'].indexOf(kbCategory) > -1) res = 'Software'
+
+console.log(res)
