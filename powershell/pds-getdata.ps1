@@ -27,15 +27,15 @@ do {
 } while ($response.data.count -gt 0)
 
 # Process the data
-$endpoint = "https://irs.service-now.com/api/now/table/sys_user"
-$headers = @{}
+# $endpoint = "https://irs.service-now.com/api/now/table/sys_user"
+# $headers = @{}
 
-foreach($item in $data) {
-    $params = @{
-        name = $item.name
-        airline = $item.airline.name
-    } | ConvertTo-Json
+# foreach($item in $data) {
+#     $params = @{
+#         name = $item.name
+#         airline = $item.airline.name
+#     } | ConvertTo-Json
 
-    $response = Invoke-RestMethod -Uri $endpoint -Method PUT -Body $params
+#     $response = Invoke-RestMethod -Uri $endpoint -Method PUT -Body $params
     
-}
+# }

@@ -39,3 +39,16 @@ if(arr['Security'].indexOf(kbCategory) > -1) res = 'Security'
 if(arr['Software'].indexOf(kbCategory) > -1) res = 'Software'
 
 console.log(res)
+
+const GlideRecord = require('../apis/GlideRecord')
+const GlideSystem = require('../apis/GlideSystem')
+
+const gr = new GlideRecord('incident')
+gr.addQuery('number', 'LIKE', 'INC0000001')
+console.log(gr.query())
+
+const gs = new GlideSystem()
+
+gs.log('Hello world', 'scratch.js')
+console.log(gs.now())
+

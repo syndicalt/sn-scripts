@@ -28,7 +28,6 @@ var tables = [
     } 
 ]
 
-// loop through each table
 tables.forEach(function(el) {
     var gr = new GlideRecord(el.name)
     gr.query()
