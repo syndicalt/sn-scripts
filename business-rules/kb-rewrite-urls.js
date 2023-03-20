@@ -42,7 +42,7 @@
 		uniqueKb.forEach(function(item) {
 			var newUrl = url + 'irs_kbRedirect.do?kb_article=' + item
 			var urlReplace = '<a title="' + item + '" href="' + newUrl + '" rel="nofollow">' + item + '</a>'
-			var regexString = '<a title=\"' + item + '\" href=(.*?) rel=(.*?)>(.*?)<\/a>'
+			var regexString = new RegExp("<a\\s[^>]*href=\"|.([^\"]*)\"[^>]*>(.*?)<\\/a>",'g')
 			gr[field] = gr[field].replace(new RegExp(regexString,'g'), urlReplace)
 			gr.update()
 		})

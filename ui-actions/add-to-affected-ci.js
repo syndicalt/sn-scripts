@@ -11,7 +11,6 @@ if (gr.next()) {
     
     gs.log('[Add CI from CSV] Binary:' + string)
      
-
     arr.forEach(function(item, index) {
         var taskCI = new GlideRecord('task_ci'),
             str = item.toString(),
