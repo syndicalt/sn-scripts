@@ -34,6 +34,7 @@ tables.forEach(function(el) {
     while(gr.next()) {
         el.fields.forEach(function(field) {
         var srch = gr[field].match(/KM[0-9]{8}/)
+        var regexString = new RegExp("<a\\s[^>]*href=\"|.([^\"]*)\"[^>]*>(.*?)<\\/a>",'g')
         if(srch) {
                 gr[field] = gr[field].replace(srch,'<a href="' + gs.getProperty('glide.servlet.uri') + '/irs_kbRedirect.do?kb_article=' + srch[0].replace('KM','KB') + '">' + srch[0].replace('KM','KB') + '</a>')
                 gr.update()

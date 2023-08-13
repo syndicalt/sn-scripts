@@ -52,3 +52,12 @@ const matrix = [
 ];
 
 console.log(spiralTraverse(matrix));
+
+$('.tinymce').tinymce({
+    setup : function(ed) {
+        ed.onInit.add(function(ed) {
+            ed.execCommand("fontName", false, "Arial");
+            ed.execCommand("fontSize", false, "2");
+        });
+    }
+});
