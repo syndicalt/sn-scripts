@@ -11,12 +11,9 @@ var obj = {
     "birth_country": "US"
 }
 
-// loop through object and create key-value pairs
-var str = Object.keys(obj).reduce(function(acc, curr) {
-    acc += 'u_' + curr + '=' + obj[curr] + '\n'
-
-    return acc
+// loop through object and set value of key = value
+for (var key in obj) {
+    if (obj.hasOwnProperty(key)) {
+        g_form.setValue(key, obj[key])
+    }
 }
-, '')
-
-console.log(str)
